@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prometheus-ingress
+  namespace: prometheus
+  annotations:
+    external-dns.alpha.kubernetes.io/target: wwww.xxxx.yyyy.zzzz
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  tls:
+  - hosts:
+    - grafana.sxb1.region.xxxx.fr
+    secretName: prometheus-tls
+  ingressClassName: nginx
+  rules:
+  - host: grafana.sxb1.region.xxxx.fr
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: stable-grafana
+            port:
+              number: 80
