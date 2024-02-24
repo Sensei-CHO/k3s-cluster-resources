@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: netdata-ingress
+  namespace: netdata
+  annotations:
+    external-dns.alpha.kubernetes.io/target: wwww.xxxx.yyyy.zzzz
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
+spec:
+  tls:
+  - hosts:
+    - netdata.sxb1.region.xxxx.fr
+    secretName: netdata-tls
+  ingressClassName: nginx
+  rules:
+  - host: netdata.sxb1.region.xxxx.fr
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: netdata
+            port:
+              number: 19999
