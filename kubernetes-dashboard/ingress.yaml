@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/target: wwww.xxxx.yyyy.zzzz
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+  name: dashboard-ingress
+  namespace: kubernetes-dashboard
+spec:
+  tls:
+  - hosts:
+    - dashboard.sxb1.region.xxxx.fr
+    secretName: dashboard-tls
+  ingressClassName: nginx
+  rules:
+  - host: dashboard.sxb1.region.xxxx.fr
+    http:
+      paths:
+      - backend:
+          serviceName: kubernetes-dashboard
+          servicePort: 443
+        path: /
