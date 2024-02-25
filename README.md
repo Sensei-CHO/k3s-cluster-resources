@@ -10,13 +10,15 @@ Here are all my manifests and scripts used to manage my kubernetes clusters !
 
 ## Storage
 
-[Longhorn](longhorn/): Storage plugin
+[Longhorn](longhorn/): CSI
 
 ## Monitoring
 
-[Netdata](netdata/): Monitoring (Not in use anymore)
+[Netdata](netdata/): (Not in use anymore)
 
-[Prometheus](prometheus/): Monitoring (Not in use anymore)
+[Prometheus](prometheus/): (Not in use anymore)
+
+[Kubernetes Dashboard](kubernetes-dashboard/): Default K8S dashboard
 
 ## Misc
 
